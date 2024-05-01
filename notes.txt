@@ -1,0 +1,17 @@
+
+// githubabhishekchaturvedi0
+// 5tmWNfUgpuH8AbRw
+// mongodb+srv://githubabhishekchaturvedi0:5tmWNfUgpuH8AbRw@entertainment-app.93th5sk.mongodb.net/
+
+
+
+
+{ title,rating,length,language,year,status,genre,synopsis,casts,links }
+
+
+
+
+env includes --> port no. , mongo db url
+
+
+// { "username":"abhishek1234", "email":"abhishek@gmail.com", "password":"abhishek" }
