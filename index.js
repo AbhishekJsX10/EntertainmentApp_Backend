@@ -19,7 +19,7 @@ import recommendRouter from "./src/routes/recommendRoutes.js"
 
 
 
-mongoose.connect("mongodb+srv://githubabhishekchaturvedi0:5tmWNfUgpuH8AbRw@entertainment-app.93th5sk.mongodb.net/",{
+mongoose.connect(process.env.MONGO_DB_URL,{
     dbName:"Entertainment_App"
 }).then(()=>console.log("MongoDB database is connected"))
 
@@ -36,7 +36,7 @@ app.use("/movies",moviesRouter)
 app.use("/bookmarks",bookmarkRouter)
 
 app.use(cors({
-    origin:["http://localhost:5173"],
+    origin:process.env.FRONTEND_URL,
     methods:["GET","POST","PUT","DELETE"],
     credentials:true
 }))
@@ -47,5 +47,5 @@ app.get("/",async(req,res)=>{
 
 
 
-app.listen(3000,()=>console.log("Server's runing on port 3000"))
+app.listen(process.env.PORT,()=>console.log(`Server's runing on port ${process.env.PORT}`))
 
