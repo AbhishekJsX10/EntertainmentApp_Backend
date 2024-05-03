@@ -74,7 +74,7 @@ export async function loginUser(req, res) {
         }
 
         // Token creation
-        const token = jwt.sign({ _id: user._id }, "#$$$#))AC((#$$_$#");
+        const token = await jwt.sign({ _id: user._id }, "#$$$#))AC((#$$_$#");
         console.log(token)
 
         return res.cookie("token", token, {
