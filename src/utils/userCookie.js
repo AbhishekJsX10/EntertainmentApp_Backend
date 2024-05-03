@@ -1,4 +1,4 @@
-const Jwt = require('jsonwebtoken')
+import  Jwt from 'jsonwebtoken'
 
 const generateCookie = (user, res, statusCode = 200, message) => {
 
