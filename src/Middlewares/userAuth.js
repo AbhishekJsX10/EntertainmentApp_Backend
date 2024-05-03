@@ -2,6 +2,8 @@
 
 import User  from "../Models/userModal.js";
 import jwt from 'jsonwebtoken'
+import { config } from 'dotenv';
+
 
 export const isAuthenticated = async (req,res,next)=>{
     const {token} = req.cookies
