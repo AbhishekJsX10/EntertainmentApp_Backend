@@ -75,12 +75,13 @@ export async function loginUser(req, res) {
 
         // Token creation
         const token = jwt.sign({ _id: user._id }, "#$$$#))AC((#$$_$#");
-        res.cookie("token", token, {
+        console.log(token)
+
+        return res.cookie("token", token, {
             httpOnly: true,
             maxAge: 3600000
         });
-
-        return res.status(200).json({
+        .status(200).json({
             success: true,
             message: "User logged in successfully"
         });
