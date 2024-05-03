@@ -1,7 +1,7 @@
 
 import  User from "../Models/userModal.js";
 import bcrypt from "bcrypt"
-import jwt from "jsonwebtoken"
+import Jwt from "jsonwebtoken"
 
 
 export async function registerUser(req, res) {
@@ -33,8 +33,8 @@ export async function registerUser(req, res) {
             password: hashedPassword
         });
 
-        // Initializing the token in cookie --> jwt secret
-        const token = jwt.sign({ _id: newUser._id }, "#$$$#))AC((#$$_$#", { expiresIn: "1h" });
+        // Initializing the token in cookie --> Jwt secret
+        const token = Jwt.sign({ _id: newUser._id }, "#$$$#))AC((#$$_$#", { expiresIn: "1h" });
 
         return res.cookie("token", token, {
             httpOnly: true,
@@ -74,16 +74,28 @@ export async function loginUser(req, res) {
         }
 
         // Token creation
-        const token = await jwt.sign({ _id: user._id }, "#$$$#))AC((#$$_$#");
-        console.log(token)
+        // const token = await Jwt.sign({ _id: user._id }, "#$$$#))AC((#$$_$#");
+        // console.log(token)
 
-        return res.cookie("token", token, {
-            httpOnly: true,
-            maxAge: 3600000
-        }).status(200).json({
-            success: true,
-            message: "User logged in successfully"
-        });
+        // return res.cookie("token", token, {
+        //     httpOnly: true,
+        //     maxAge: 3600000
+        // }).status(200).json({
+        //     success: true,
+        //     message: "User logged in successfully"
+        // });
+
+        
+    const token = await Jwt.sign({ _id: user._id }, "#$$$#))AC((#$$_$#");
+
+    res.status(201).cookie("token", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000
+    }).json({
+        success: true,
+        message: "Login sucessfull",
+        data: user
+    })
     } catch (error) {
         console.error(error.message);
         return res.status(500).json({ success: false, message: "Internal Server Error" });
@@ -103,7 +115,7 @@ export async function detailsUser(req, res) {
     } else {
         try {
             // Extracting user id from token
-            const decoded = jwt.verify(token, "#$$$#))AC((#$$_$#");
+            const decoded = Jwt.verify(token, "#$$$#))AC((#$$_$#");
             const user = await User.findById(decoded._id);
 
             return res.status(200).json({
